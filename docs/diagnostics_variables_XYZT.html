@@ -1,0 +1,4470 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jens Daniel Müller" />
+
+
+<title>Overview XYZT variables</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CESM-ETHZ RECCAP-ocean</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="overview.html">Overview</a>
+</li>
+<li>
+  <a href="regions.html">Regions</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Diagnostics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="diagnostics_variables_T.html">T</a>
+    </li>
+    <li>
+      <a href="diagnostics_variables_XYT.html">XYT</a>
+    </li>
+    <li>
+      <a href="diagnostics_variables_XYZT.html">XYZT</a>
+    </li>
+    <li>
+      <a href="diagnostics_variables_ancillary.html">ancillary</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+<li>
+  <a href="https://jens-daniel-mueller.github.io/">
+    <span class="fa fa-home"></span>
+     
+    Jens' homepage
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Overview XYZT variables</h1>
+<h4 class="author">Jens Daniel Müller</h4>
+<h4 class="date">12 March, 2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-03-12
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>RECCAP2_CESM_ETHZ_submission/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210113code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210113)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20210113code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20210113)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerRECCAP2CESMETHZsubmissiontree415448d8694b0295c819d7687f02142d5c7a92e7targetblank415448da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/tree/415448d8694b0295c819d7687f02142d5c7a92e7" target="_blank">415448d</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuellerRECCAP2CESMETHZsubmissiontree415448d8694b0295c819d7687f02142d5c7a92e7targetblank415448da" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/tree/415448d8694b0295c819d7687f02142d5c7a92e7" target="_blank">415448d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   code/Workflowr_project_managment.R
+    Modified:   data/overview/overview_files.csv
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/diagnostics_variables_XYZT.Rmd</code>) and HTML (<code>docs/diagnostics_variables_XYZT.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/415448d8694b0295c819d7687f02142d5c7a92e7/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">415448d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+<td>
+rebuild all with March2021_v2 data version
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/diagnostics_variables_XYZT.html" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/3bd634e79977bd3ec639c1023d8d09905d9d4fdc/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">3bd634e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+<td>
+rebuild all with March2021 data version
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/diagnostics_variables_XYZT.html" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/75c95dc7d0cb4cf60c445c0dd9969851bdba6ad4/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">75c95dc</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+<td>
+adapt March2021 data version
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/diagnostics_variables_XYZT.html" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/eafc75c64917c3f27f6a0459d5d861075a0d4456/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">eafc75c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+<td>
+rebuild all with ancillary variables
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/diagnostics_variables_XYZT.html" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/69c6cb015fea58746134dc14243eee570e1cd425/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">69c6cb0</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+<td>
+rebuild with ancillary variables
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/61543c7128553c389923e97687d74058b3466015/docs/diagnostics_variables_XYZT.html" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/21789bfffab8e341ca8c4b16f1bcae4e7bd5ab96/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">21789bf</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+<td>
+rebuild after cleaning
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/diagnostics_variables_XYZT.html" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/73037f195a7f764e6d1db3dfb80bc4b921a35df1/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">73037f1</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+<td>
+split diagnostics scripts per variable
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/diagnostics_variables_XYZT.html" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/91e453ae37a8206f2f6ea049d0b1d53bf587883c/analysis/diagnostics_variables_XYZT.Rmd" target="_blank">91e453a</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+<td>
+split diagnostics scripts per variable
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="file-names" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> File names</h1>
+<pre class="r"><code>overview &lt;-
+  read_csv(&quot;data/overview/overview_files.csv&quot;)
+
+variables &lt;-
+  overview %&gt;%
+  filter(shape == &quot;XYZT&quot;) %&gt;%
+  distinct(variable_id) %&gt;%
+  pull()
+
+# set name of model to be subsetted
+experiment_IDs &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;)</code></pre>
+</div>
+<div id="plots" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Plots</h1>
+<p>Below, please find plots of the variables in the following order:</p>
+<ul>
+<li>dissic, epc, no3, o2, po4, si, so, talk, thetao</li>
+</ul>
+<p>Plots for all variables are shown one after the other for the model runs:</p>
+<ul>
+<li>A, B, C, D</li>
+</ul>
+<pre class="r"><code># variables &lt;- variables[1]
+# experiment_IDs &lt;- experiment_IDs[1]
+
+for (i_experiment_ID in experiment_IDs) {
+  for (i_variable in variables) {
+    # i_experiment_ID &lt;- experiment_IDs[1]
+    # i_variable &lt;- variables[1]
+    
+    # read list of all files
+    file &lt;- paste(i_variable,
+                  &quot;_CESM-ETHZ_&quot;,
+                  i_experiment_ID,
+                  &quot;_1_gr_1980-2018_v20210312.nc&quot;,
+                  sep = &quot;&quot;)
+    print(file)
+    
+    # read in data
+    variable_data &lt;-
+      read_ncdf(paste(path_cmorized_annual,
+                   file,
+                   sep = &quot;&quot;))
+    
+    # convert to tibble
+    variable_data_tibble &lt;- variable_data %&gt;%
+      as_tibble()
+    
+    # drop units for plotting
+    variable_data_tibble &lt;- variable_data_tibble %&gt;% 
+      drop_units()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    variable_data_tibble_climatology &lt;-
+      variable_data_tibble %&gt;%
+      group_by(depth) %&gt;%
+      summarise(
+        &quot;mean&quot; := mean(!!sym(i_variable), na.rm = TRUE),
+        &quot;min&quot;  := min(!!sym(i_variable), na.rm = TRUE),
+        &quot;max&quot;  := max(!!sym(i_variable), na.rm = TRUE)
+      ) %&gt;%
+      ungroup()
+    
+    print(
+      variable_data_tibble_climatology %&gt;%
+        arrange(depth) %&gt;%
+        ggplot() +
+        geom_ribbon(aes(
+          xmin = min, xmax = max, y = depth,
+          fill = &quot;min/max&quot;
+        ), alpha = 0.3) +
+        geom_path(aes(mean, depth, col=&quot;mean&quot;)) +
+        scale_y_reverse()  +
+        scale_fill_viridis_d() +
+        scale_color_viridis_d() +
+        labs(
+          title = paste(&quot;experiment_ID:&quot;, i_experiment_ID),
+          y = i_variable
+        ) +
+        theme(legend.title = element_blank())
+    )
+    
+    
+    # print(
+    #   variable_data_tibble %&gt;%
+    #     ggplot(aes(!!sym(i_variable), depth)) +
+    #     geom_bin2d(bins = 100) +
+    #     scale_y_reverse()  +
+    #     scale_fill_viridis_c() +
+    #     labs(
+    #       title = paste(&quot;experiment_ID:&quot;, i_experiment_ID)
+    #     )
+    # )
+
+  }
+}</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-1">
+Past versions of 3D_variables-1.png
+</button>
+</p>
+<div id="fig-3D_variables-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-1.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-1.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-1.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;epc_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-2">
+Past versions of 3D_variables-2.png
+</button>
+</p>
+<div id="fig-3D_variables-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-2.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-2.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-2.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-2.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-3">
+Past versions of 3D_variables-3.png
+</button>
+</p>
+<div id="fig-3D_variables-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-3.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-4">
+Past versions of 3D_variables-4.png
+</button>
+</p>
+<div id="fig-3D_variables-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-4.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-5">
+Past versions of 3D_variables-5.png
+</button>
+</p>
+<div id="fig-3D_variables-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-5.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-6">
+Past versions of 3D_variables-6.png
+</button>
+</p>
+<div id="fig-3D_variables-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-6.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-7">
+Past versions of 3D_variables-7.png
+</button>
+</p>
+<div id="fig-3D_variables-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-7.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-8">
+Past versions of 3D_variables-8.png
+</button>
+</p>
+<div id="fig-3D_variables-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-8.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-9">
+Past versions of 3D_variables-9.png
+</button>
+</p>
+<div id="fig-3D_variables-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-9.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-10">
+Past versions of 3D_variables-10.png
+</button>
+</p>
+<div id="fig-3D_variables-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-10.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;epc_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-11">
+Past versions of 3D_variables-11.png
+</button>
+</p>
+<div id="fig-3D_variables-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-11.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;no3_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-12">
+Past versions of 3D_variables-12.png
+</button>
+</p>
+<div id="fig-3D_variables-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-12.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;o2_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-13">
+Past versions of 3D_variables-13.png
+</button>
+</p>
+<div id="fig-3D_variables-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-13.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;po4_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-14">
+Past versions of 3D_variables-14.png
+</button>
+</p>
+<div id="fig-3D_variables-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-14.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;si_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-15">
+Past versions of 3D_variables-15.png
+</button>
+</p>
+<div id="fig-3D_variables-15" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-15.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;so_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-16">
+Past versions of 3D_variables-16.png
+</button>
+</p>
+<div id="fig-3D_variables-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-16.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;talk_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-17">
+Past versions of 3D_variables-17.png
+</button>
+</p>
+<div id="fig-3D_variables-17" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-17.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_B_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-18">
+Past versions of 3D_variables-18.png
+</button>
+</p>
+<div id="fig-3D_variables-18" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-18.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-19">
+Past versions of 3D_variables-19.png
+</button>
+</p>
+<div id="fig-3D_variables-19" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-19.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;epc_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-20">
+Past versions of 3D_variables-20.png
+</button>
+</p>
+<div id="fig-3D_variables-20" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-20.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;no3_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-21">
+Past versions of 3D_variables-21.png
+</button>
+</p>
+<div id="fig-3D_variables-21" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-21.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;o2_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-22">
+Past versions of 3D_variables-22.png
+</button>
+</p>
+<div id="fig-3D_variables-22" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-22.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;po4_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-23">
+Past versions of 3D_variables-23.png
+</button>
+</p>
+<div id="fig-3D_variables-23" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-23.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;si_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-24">
+Past versions of 3D_variables-24.png
+</button>
+</p>
+<div id="fig-3D_variables-24" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-24.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;so_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-25">
+Past versions of 3D_variables-25.png
+</button>
+</p>
+<div id="fig-3D_variables-25" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-25.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;talk_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-26">
+Past versions of 3D_variables-26.png
+</button>
+</p>
+<div id="fig-3D_variables-26" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-26.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_C_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-27">
+Past versions of 3D_variables-27.png
+</button>
+</p>
+<div id="fig-3D_variables-27" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-27.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-28">
+Past versions of 3D_variables-28.png
+</button>
+</p>
+<div id="fig-3D_variables-28" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-28.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;epc_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-29">
+Past versions of 3D_variables-29.png
+</button>
+</p>
+<div id="fig-3D_variables-29" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-29.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;no3_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-30">
+Past versions of 3D_variables-30.png
+</button>
+</p>
+<div id="fig-3D_variables-30" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-30.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;o2_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-31">
+Past versions of 3D_variables-31.png
+</button>
+</p>
+<div id="fig-3D_variables-31" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-31.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;po4_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-32">
+Past versions of 3D_variables-32.png
+</button>
+</p>
+<div id="fig-3D_variables-32" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-32.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;si_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-33">
+Past versions of 3D_variables-33.png
+</button>
+</p>
+<div id="fig-3D_variables-33" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-33.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;so_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-34">
+Past versions of 3D_variables-34.png
+</button>
+</p>
+<div id="fig-3D_variables-34" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-34.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;talk_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-35">
+Past versions of 3D_variables-35.png
+</button>
+</p>
+<div id="fig-3D_variables-35" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/1bb2b08330aaedea6bab9a937ad3e37a41f9ad7d/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" target="_blank">1bb2b08</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-35.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_D_1_gr_1980-2018_v20210312.nc&quot;</code></pre>
+<p><img src="figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-3D_variables-36">
+Past versions of 3D_variables-36.png
+</button>
+</p>
+<div id="fig-3D_variables-36" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/92e996ccb768726f7d781eadbeafd9fa765ce6a6/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" target="_blank">92e996c</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/7e20f1b2750e71f64541a59da984d98e07a0f0b4/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" target="_blank">7e20f1b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/a074aa8a7103c64adc98bdf8cd893cbfedc0f952/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" target="_blank">a074aa8</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/fe6bd419ac3b0af92304f7795994faacb1c114ea/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" target="_blank">fe6bd41</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/61543c7128553c389923e97687d74058b3466015/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" target="_blank">61543c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-03
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission/blob/063851dda22e5fc2ecb7b5491c70ddc439b42de2/docs/figure/diagnostics_variables_XYZT.Rmd/3D_variables-36.png" target="_blank">063851d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-03-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: openSUSE Leap 15.2
+
+Matrix products: default
+BLAS:   /usr/local/R-4.0.3/lib64/R/lib/libRblas.so
+LAPACK: /usr/local/R-4.0.3/lib64/R/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] units_0.6-7     tidync_0.2.4    stars_0.4-3     sf_0.9-6       
+ [5] abind_1.4-5     metR_0.9.0      scico_1.2.0     patchwork_1.1.1
+ [9] collapse_1.5.0  forcats_0.5.0   stringr_1.4.0   dplyr_1.0.2    
+[13] purrr_0.3.4     readr_1.4.0     tidyr_1.1.2     tibble_3.0.4   
+[17] ggplot2_3.3.2   tidyverse_1.3.0 workflowr_1.6.2
+
+loaded via a namespace (and not attached):
+ [1] fs_1.5.0                 lubridate_1.7.9          httr_1.4.2              
+ [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
+ [7] R6_2.5.0                 KernSmooth_2.23-17       DBI_1.1.0               
+[10] colorspace_1.4-1         withr_2.3.0              tidyselect_1.1.0        
+[13] compiler_4.0.3           git2r_0.27.1             cli_2.1.0               
+[16] rvest_0.3.6              RNetCDF_2.4-2            xml2_1.3.2              
+[19] labeling_0.4.2           scales_1.1.1             checkmate_2.0.0         
+[22] classInt_0.4-3           digest_0.6.27            rmarkdown_2.5           
+[25] pkgconfig_2.0.3          htmltools_0.5.0          dbplyr_1.4.4            
+[28] rlang_0.4.9              readxl_1.3.1             rstudioapi_0.13         
+[31] generics_0.0.2           farver_2.0.3             jsonlite_1.7.1          
+[34] magrittr_1.5             ncmeta_0.3.0             Matrix_1.2-18           
+[37] Rcpp_1.0.5               munsell_0.5.0            fansi_0.4.1             
+[40] lifecycle_0.2.0          stringi_1.5.3            whisker_0.4             
+[43] yaml_2.2.1               grid_4.0.3               blob_1.2.1              
+[46] parallel_4.0.3           promises_1.1.1           crayon_1.3.4            
+[49] lattice_0.20-41          haven_2.3.1              hms_0.5.3               
+[52] knitr_1.30               pillar_1.4.7             reprex_0.3.0            
+[55] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.2.0
+[58] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.5             
+[61] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
+[64] assertthat_0.2.1         xfun_0.18                lwgeom_0.2-5            
+[67] broom_0.7.2              RcppEigen_0.3.3.7.0      e1071_1.7-4             
+[70] later_1.1.0.1            class_7.3-17             ncdf4_1.17              
+[73] viridisLite_0.3.0        ellipsis_0.3.1          </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
