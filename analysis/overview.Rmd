@@ -1,5 +1,5 @@
 ---
-title: "Overview submitted files"
+title: "Overview"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -23,12 +23,12 @@ editor_options:
 path_cmorized <-
   "/net/kryo/work/loher/ROMS/RECCAP2/"
 
+
 files <- c(
   "Atlantic/cmorized/RECCAP2_amacanc_Lp576.nc",
   "Pactcs30/cmorized/RECCAP2_pactcs30.nc",
   "Humpac15/cmorized/RECCAP2_humpac15.nc"
 )
-
 
 ```
 
@@ -42,7 +42,20 @@ library(rnaturalearthdata)
 
 ```
 
-```{r plot_test_files}
+# Files
+
+Following files were inspected:
+
+```{r files}
+print(path_cmorized)
+print(files)
+```
+
+# Dimensions and maps
+
+For all files, the dimensions and parameter values at the latest time step are shown below.
+
+```{r plot_test_files, fig.asp=0.5}
 
 world <- ne_countries(scale = "small", returnclass = "sf")
 

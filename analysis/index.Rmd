@@ -12,16 +12,7 @@ editor_options:
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-On this website we present some initial analysis of the CESM-ETHZ model output submitted to RECCAP2-ocean.
-
-This initial analysis covers results from 4 model runs (A-D).
-
-The diagnostic plots differ for following types of variables:
-
--   T: Regionally integrated time series data
--   XYT: 2D-fields of variables with monthly resolution
--   XYZT: 3D-fields of variables with annual resolution
--   ancillary data
+On this website we present some initial analysis of the CESM-ROMS model output submitted to RECCAP2-ocean.
 
 Please navigate trough the navbar on top to take a look at the various chapters of this analysis. The links in the upper right corner bring you to the source code of this project and back to Jens' main homepage.
 
