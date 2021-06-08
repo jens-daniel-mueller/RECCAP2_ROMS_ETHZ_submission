@@ -13,14 +13,9 @@ wflow_publish(all = TRUE, message = "cleaned outdated content")
 wflow_publish(here::here("analysis",
                          c(
                            "index.Rmd",
-                           "overview.Rmd",
-                           "regions.Rmd",
-                           "diagnostics_variables_T.Rmd",
-                           "diagnostics_variables_XYT.Rmd",
-                           "diagnostics_variables_XYZT.Rmd",
-                           "diagnostics_variables_ancillary.Rmd"
+                           "overview.Rmd"
                          )),
-              message = "rebuild all with March2021_v2 data version",
+              message = "switched navbar name from CESM to ROMS",
               republish = TRUE)
 
 # Push latest version to GitHub

@@ -1,14 +1,14 @@
-name: RECCAP2_CESM_ETHZ_submission
+name: RECCAP2_ROMS_ETHZ_submission
 output_dir: ../docs
 navbar:
-  title: CESM-ETHZ RECCAP-ocean
+  title: CESM-ROMS RECCAP-ocean
   left:
   - text: Overview
     href: overview.html
   right:
   - icon: fa-github
     text: Source code
-    href: https://github.com/jens-daniel-mueller/RECCAP2_CESM_ETHZ_submission
+    href: https://github.com/jens-daniel-mueller/RECCAP2_ROMS_ETHZ_submission
   - icon: fa-home
     text: Jens' homepage
     href: https://jens-daniel-mueller.github.io/
