@@ -18,10 +18,17 @@ editor_options:
 # https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
 ```
 
-```{r set_paths, include=FALSE}
+```{r set_path_and_file_names, include=FALSE}
 
-path_cmorized_annual <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_March2021/"
+path_cmorized <-
+  "/net/kryo/work/loher/ROMS/RECCAP2/"
+
+files <- c(
+  "Atlantic/cmorized/RECCAP2_amacanc_Lp576.nc",
+  "Pactcs30/cmorized/RECCAP2_pactcs30.nc",
+  "Humpac15/cmorized/RECCAP2_humpac15.nc"
+)
+
 
 ```
 
@@ -29,115 +36,52 @@ path_cmorized_annual <-
 library(stars)
 library(tidync)
 library(units)
-```
-
-# File names
-
-```{r define}
-
-overview <-
-  read_csv("data/overview/overview_files.csv")
-
-variables <-
-  overview %>%
-  filter(shape == "XYZT") %>%
-  distinct(variable_id) %>%
-  pull()
-
-# set name of model to be subsetted
-experiment_IDs <- c("A", "B", "C", "D")
+library(PCICt)
+library(rnaturalearth)
+library(rnaturalearthdata)
 
 ```
-
-# Plots
-
-Below, please find plots of the variables in the following order:
-
-- `r variables`
-
-Plots for all variables are shown one after the other for the model runs:
-
-- `r experiment_IDs`
-
 
 ```{r 3D_variables}
 
-# variables <- variables[1]
-# experiment_IDs <- experiment_IDs[1]
+world <- ne_countries(scale = "small", returnclass = "sf")
 
-for (i_experiment_ID in experiment_IDs) {
-  for (i_variable in variables) {
-    # i_experiment_ID <- experiment_IDs[1]
-    # i_variable <- variables[1]
-    
-    # read list of all files
-    file <- paste(i_variable,
-                  "_CESM-ETHZ_",
-                  i_experiment_ID,
-                  "_1_gr_1980-2018_v20210312.nc",
-                  sep = "")
-    print(file)
-    
-    # read in data
-    variable_data <-
-      read_ncdf(paste(path_cmorized_annual,
-                   file,
-                   sep = ""))
-    
-    # convert to tibble
-    variable_data_tibble <- variable_data %>%
-      as_tibble()
-    
-    # drop units for plotting
-    variable_data_tibble <- variable_data_tibble %>% 
-      drop_units()
-    
-    # remove open link to nc file
-    rm(variable_data)
-    
-    variable_data_tibble_climatology <-
-      variable_data_tibble %>%
-      group_by(depth) %>%
-      summarise(
-        "mean" := mean(!!sym(i_variable), na.rm = TRUE),
-        "min"  := min(!!sym(i_variable), na.rm = TRUE),
-        "max"  := max(!!sym(i_variable), na.rm = TRUE)
-      ) %>%
-      ungroup()
-    
-    print(
-      variable_data_tibble_climatology %>%
-        arrange(depth) %>%
-        ggplot() +
-        geom_ribbon(aes(
-          xmin = min, xmax = max, y = depth,
-          fill = "min/max"
-        ), alpha = 0.3) +
-        geom_path(aes(mean, depth, col="mean")) +
-        scale_y_reverse()  +
-        scale_fill_viridis_d() +
-        scale_color_viridis_d() +
-        labs(
-          title = paste("experiment_ID:", i_experiment_ID),
-          y = i_variable
-        ) +
-        theme(legend.title = element_blank())
+for (i_files in files) {
+  
+  # read in data
+  variable_data <-
+    read_ncdf(
+      paste(path_cmorized,
+            i_files,
+            sep = ""),
+      make_units = FALSE,
+      make_time = TRUE,
+      #ncsub = cbind(start = c(1, 1, 1), count = c(2, 2, 2)),
+      var = "dissicos"
     )
-    
-    
-    # print(
-    #   variable_data_tibble %>%
-    #     ggplot(aes(!!sym(i_variable), depth)) +
-    #     geom_bin2d(bins = 100) +
-    #     scale_y_reverse()  +
-    #     scale_fill_viridis_c() +
-    #     labs(
-    #       title = paste("experiment_ID:", i_experiment_ID)
-    #     )
-    # )
-
-  }
+  
+  # convert to tibble
+  variable_data_tibble <- variable_data %>%
+    slice(index = 480, along = time) %>%
+    as_tibble() %>%
+    drop_na()
+  
+  # remove open link to nc file
+  rm(variable_data)
+  
+  print(
+  ggplot(data = world) +
+    geom_sf() +
+    geom_raster(data = variable_data_tibble,
+                aes(lon, lat, fill = dissicos)) +
+    scale_fill_viridis_c() +
+    labs(title = i_files)
+  )
+  
+  
+  
 }
+
 
 ```
 
