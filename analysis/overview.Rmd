@@ -12,143 +12,132 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r global_options, include = FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
 ```
 
-```{r load_libraries}
-library(tidyverse)
-library(gt)
-```
+```{r set_paths, include=FALSE}
 
-```{r ggplot_theme, include = FALSE}
-theme_set(theme_bw())
-```
-
-# Load data
-
-This analysis is based on Table 3 of the RECCAP2-ocean protocol for model output, and statistics of the ETHZ CESM model output.
-
-```{r Table_3_from_protocol}
-
-# read Table 3 from model protocol
-table_3 <- read_csv(
-  here::here(
-    "data/overview",
-    "RECCAP2-ocean_data_products_overview - Model_protocol_table3.csv"
-  )
-)
-
-# replace placeholder variable name with actual CESM variable name
-table_3_temp <- table_3 %>% 
-  filter(variable_id == "epc100type / epc1000type") %>% 
-  select(-variable_id)
-
-table_3_temp <- expand_grid(
-  table_3_temp,
-  variable_id = c("epc100hard","epc1000hard","epc100soft","epc1000soft")
-)
-
-table_3 <- table_3 %>% 
-  filter(variable_id != "epc100type / epc1000type")
-
-table_3 <- bind_rows(table_3, table_3_temp)
-rm(table_3_temp)
+path_cmorized_annual <-
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_March2021/"
 
 ```
 
+```{r load_libraries_specific, include=FALSE}
+library(stars)
+library(tidync)
+library(units)
+```
 
-The list of files and sizes of the ETHZ CESM model output refers to the content in this folder:
+# File names
 
-```{r CESM_output_files_list}
+```{r define}
 
-# set path to output
-path_CESM <-
-  "/net/kryo/work/loher/CESM_output/RECCAP2/submit_March2021"
-path_CESM
+overview <-
+  read_csv("data/overview/overview_files.csv")
 
-# create list of CESM output files and sizes
+variables <-
+  overview %>%
+  filter(shape == "XYZT") %>%
+  distinct(variable_id) %>%
+  pull()
 
-CESM_files_names <- list.files(path = path_CESM,
-                               pattern = ".nc")
-CESM_files_sizes <-
-  file.size(paste(path_CESM, CESM_files_names, sep = "/"))
-
-CESM_files <- bind_cols(file_name = CESM_files_names,
-                        file_size_MB = round(CESM_files_sizes * 1e-6, 1))
-
-rm(CESM_files_names, CESM_files_sizes)
-
-# extract variable_id and experiment_id from file name
-CESM_files <- CESM_files %>%
-  mutate(
-    variable_id = str_split(file_name,
-                            pattern = "_CESM",
-                            simplify = TRUE)[, 1],
-    experiment_id = str_sub(string = file_name, -19, -19)
-  ) %>%
-  mutate(experiment_id = if_else(
-    experiment_id %in% c("A", "B", "C", "D"),
-    experiment_id,
-    "ancillary"
-  )) %>%
-  select(-c(file_name))
+# set name of model to be subsetted
+experiment_IDs <- c("A", "B", "C", "D")
 
 ```
 
-```{r create_overview_table}
+# Plots
 
-# join file list and tab 3
-overview <- full_join(table_3, CESM_files) %>%
-  arrange(variable_id)
+Below, please find plots of the variables in the following order:
 
-rm(CESM_files, table_3)
+- `r variables`
 
-# write overview file
-overview %>%
-  write_csv("data/overview/overview_files.csv")
+Plots for all variables are shown one after the other for the model runs:
+
+- `r experiment_IDs`
+
+
+```{r 3D_variables}
+
+# variables <- variables[1]
+# experiment_IDs <- experiment_IDs[1]
+
+for (i_experiment_ID in experiment_IDs) {
+  for (i_variable in variables) {
+    # i_experiment_ID <- experiment_IDs[1]
+    # i_variable <- variables[1]
+    
+    # read list of all files
+    file <- paste(i_variable,
+                  "_CESM-ETHZ_",
+                  i_experiment_ID,
+                  "_1_gr_1980-2018_v20210312.nc",
+                  sep = "")
+    print(file)
+    
+    # read in data
+    variable_data <-
+      read_ncdf(paste(path_cmorized_annual,
+                   file,
+                   sep = ""))
+    
+    # convert to tibble
+    variable_data_tibble <- variable_data %>%
+      as_tibble()
+    
+    # drop units for plotting
+    variable_data_tibble <- variable_data_tibble %>% 
+      drop_units()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    variable_data_tibble_climatology <-
+      variable_data_tibble %>%
+      group_by(depth) %>%
+      summarise(
+        "mean" := mean(!!sym(i_variable), na.rm = TRUE),
+        "min"  := min(!!sym(i_variable), na.rm = TRUE),
+        "max"  := max(!!sym(i_variable), na.rm = TRUE)
+      ) %>%
+      ungroup()
+    
+    print(
+      variable_data_tibble_climatology %>%
+        arrange(depth) %>%
+        ggplot() +
+        geom_ribbon(aes(
+          xmin = min, xmax = max, y = depth,
+          fill = "min/max"
+        ), alpha = 0.3) +
+        geom_path(aes(mean, depth, col="mean")) +
+        scale_y_reverse()  +
+        scale_fill_viridis_d() +
+        scale_color_viridis_d() +
+        labs(
+          title = paste("experiment_ID:", i_experiment_ID),
+          y = i_variable
+        ) +
+        theme(legend.title = element_blank())
+    )
+    
+    
+    # print(
+    #   variable_data_tibble %>%
+    #     ggplot(aes(!!sym(i_variable), depth)) +
+    #     geom_bin2d(bins = 100) +
+    #     scale_y_reverse()  +
+    #     scale_fill_viridis_c() +
+    #     labs(
+    #       title = paste("experiment_ID:", i_experiment_ID)
+    #     )
+    # )
+
+  }
+}
 
 ```
 
-# Overview CESM output
-
-Overview table of output files created. Please note, that for each listed variable, `four experiment_id (A-D) versions` exist.
-
-```{r files_list}
-
-overview %>% 
-  group_by(variable_id, dimension, priority) %>% 
-  summarise_at("file_size_MB", sum, na.rm = TRUE) %>% 
-  arrange(dimension, priority) %>% 
-  gt(
-    rowname_col = "variable_id",
-    groupname_col = c("dimension", "priority"),
-    row_group.sep = " | Priority: "
-  ) %>%
-  summary_rows(groups = TRUE,
-               fns = list(total = "sum"))
-
-```
-
-## Submission tar files
-
-```{r CESM_submission_files_list}
-
-# create list of CESM output files and sizes
-
-CESM_files_names_tar <- list.files(path = path_CESM,
-                                   pattern = ".tar")
-CESM_files_sizes_tar <-
-  file.size(paste(path_CESM, CESM_files_names_tar, sep = "/"))
-
-CESM_files_tar <- bind_cols(
-  file_name = CESM_files_names_tar,
-  file_size_GB = round(CESM_files_sizes_tar * 1e-9, 1))
-
-rm(path_CESM, CESM_files_names_tar, CESM_files_sizes_tar)
-
-# extract variable_id and experiment_id from file name
-CESM_files_tar
-
-
-```

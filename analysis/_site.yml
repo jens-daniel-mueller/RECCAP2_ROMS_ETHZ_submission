@@ -5,18 +5,6 @@ navbar:
   left:
   - text: Overview
     href: overview.html
-  - text: Regions
-    href: regions.html
-  - text: Diagnostics
-    menu:
-    - text: T
-      href: diagnostics_variables_T.html
-    - text: XYT
-      href: diagnostics_variables_XYT.html
-    - text: XYZT
-      href: diagnostics_variables_XYZT.html
-    - text: ancillary
-      href: diagnostics_variables_ancillary.html
   right:
   - icon: fa-github
     text: Source code
