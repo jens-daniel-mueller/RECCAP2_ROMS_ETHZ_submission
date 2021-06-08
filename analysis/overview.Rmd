@@ -42,11 +42,12 @@ library(rnaturalearthdata)
 
 ```
 
-```{r 3D_variables}
+```{r plot_test_files}
 
 world <- ne_countries(scale = "small", returnclass = "sf")
 
 for (i_files in files) {
+  # i_files <- files[2]
   
   # read in data
   variable_data <-
@@ -55,30 +56,36 @@ for (i_files in files) {
             i_files,
             sep = ""),
       make_units = FALSE,
-      make_time = TRUE,
+      make_time = TRUE
       #ncsub = cbind(start = c(1, 1, 1), count = c(2, 2, 2)),
-      var = "dissicos"
+      # var = "dissicos"
     )
   
-  # convert to tibble
-  variable_data_tibble <- variable_data %>%
-    slice(index = 480, along = time) %>%
-    as_tibble() %>%
-    drop_na()
+  print(i_files)
+  print(st_dimensions(variable_data))
+
+  time_length <- st_dimensions(variable_data)$time$to
+  time_max <- st_dimensions(variable_data)$time$values[time_length]
+
   
-  # remove open link to nc file
-  rm(variable_data)
+  variable_data <- variable_data %>%
+    slice(index = time_length, along = time)
   
-  print(
-  ggplot(data = world) +
-    geom_sf() +
-    geom_raster(data = variable_data_tibble,
-                aes(lon, lat, fill = dissicos)) +
-    scale_fill_viridis_c() +
-    labs(title = i_files)
-  )
-  
-  
+  attribute_names <- names(variable_data)
+
+  for (i_attribute in attribute_names) {
+    # i_attribute <- attribute_names[3]
+    
+    print(
+    ggplot(data = world) +
+      geom_stars(data = variable_data[i_attribute]) +
+      geom_sf()  +
+      coord_sf(expand = 0) +
+      scale_fill_viridis_c() +
+      labs(title = paste(i_files, "| time: ",time_max))
+    )
+    
+  }
   
 }
 
